@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\usepackage{polski}
+\usepackage[a4paper, top=2cm, right=2cm, bottom=2cm, left=2cm, marginparwidth=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage[export]{adjustbox}
+\usepackage{amssymb}
+
+\title{Golang}
+\author{Michał Witkowski}
+\date{April 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Wstęp}
+
+\vspace{1em}
+
+Oficjalna dokumentacja programu Silne Liczby mojego autorstwa
+
+
+\section{Opis kodu}
+
+\subsection{Silna liczba}
+
+\includegraphics[width=45em, height=25em, center]{strongNums_silnia.png}
+
+\vspace{2em}
+Program zaczynamy funkcją, która ma za zadanie obliczać nam silnię kolejnych liczb aż do momentu znalezienia takiego wyniku silni danej liczby, która będzie zawierać w sobie liczby odpowiadające kolejnym bajtom naszego "nicku". Do znalezienia wystarczy naszą liczbę silni zmienić na string, by następnie wyszukiwać w nim funkcją Contains() kolejnych liczb z naszego "nicku". Proste, prawda? No, niezupełnie. Daje nam to też przeszkody, takie jak problem z typami.
+
+\vspace{1em}
+
+Zmusza nas to do użycia typu big.Int wziętego z biblioteki. Spowodowane jest to tym, że aby znaleźć odpowiadające nam liczby, dochodzimy do gigantycznych liczb, których podstawowe typy już nie obsługują.
+
+
+\subsection{Słaba liczba}
+
+\includegraphics[width=45em, height=25em, center]{strongNums_weak.png}
+
+\vspace{3em}
+
+Za słabą liczbę odpowiada u nas funkcja Fibonacciego, która składuje nasze wyniki w mapie. Moim skromnym zdaniem mapa jest idealna do tego, gdyż wiemy z góry, że nasze klucze, będące kolejnymi numerami w ciągu fibonacciego, są unikalne. Tutaj otrzymujemy piękno mapy, czyli inkrementujemy wartości w mapie dla danego klucza, jeśli już istnieje, a jeśli nie, tworzymy go.
+
+
+W naszym zadaniu fib(30) był z góry nałożony i nam wystarczał. Jednak operujemy na tak dużych liczbach, które w fibonaccim rosną wykładniczo, że np. po teście dla fibonacciego z 48 liczb, mój program nie poradził sobie z kalkulacjami w ciągu minuty!
+
+\vspace{2em}
+
+\includegraphics[width=45em, height=25em, center]{strongNums_core.png}
+
+\vspace{1em}
+
+Część główna naszego programu polega na podaniu naszego "nicku", przerobienia go na bajty i użycia w naszej funkcji silni, która wymieniona wcześniej, zwraca nam silną liczbę.
+
+Słabą liczbę otrzymujemy wykorzystując ciąg fibonacciego, a pętlą for drukujemy dla sprawdzenia całą naszą mapę, która tworzona jest wewnątrz fibRecursive(30).
+
+Na koniec dzięki temu, że znamy naszą silną liczbę, możemy przeiterować się po naszej mapie, szukając w "polu" wartości liczbę najbliższą naszej "silnej liczbie" i gdy ją znajdziemy, bierzemy jej klucz, którym jest nasza liczba z ciągu fibonacciego. Proste, a skuteczne. I dodatkowo pokazuje piękno mapy i jej obsługi w Go.
+
+\section{Opinia}
+
+\vspace{1em}
+
+Zadanie końcowo przynosi wiele pożytecznej wiedzy. Między innymi dowiedziałem się podczas pisania Fibonacciego, że go nie posiada rekurencji ogonowej (a szkoda, ciekawy temat). Po raz pierwszy też użyłem moim zdaniem jednej z najlepszych struktur do przechowywania danych (i wydaje mi się często niedocenianej).
+
+\vspace{1em}
+
+Zadanie daje nam też ciekawy problem skalowalności. W zadaniu stosowałem zasadę KISS (Keep It Simple, Stupid), więc rekurencyjny fibonacci spełnia swoją robotę. Natomiast rozszerzenie programu o kolejne liczby stawia nam spore wyzwania, bo zarówno w fibonaccim jak i w silni liczby rosną w zastraszającym tempie. Silnia zmusza nas również przez ogrom swoich liczb do użytku niestandardowych typów zaciągniętych z bibliotek.
+
+\vspace{1em}
+
+Gdybym miał podsumować całe zadanie i wyciągnąć jakieś szczególnie istotne dla mnie wnioski, odpowiedziałbym, że wyżej wymieniony problem skalowalności jest dobrą odpowiedzią. Na podstawie zabawy matematycznej na dużych liczbach, zwykły 80-linijkowy program jest w stanie zmusić moją maszynę do ciężkiej pracy. Zwykły przeskok z fib(30) do fib(48) był praktycznie nieosiągalny, a to tylko 18 liczb wyżej. Każe się to zastanowić nad możliwościami pisanego przez nas kodu oraz problemami które dla tego samego programu zaczynają pojawiać się dopiero od określonego pułapu.
+
+\end{document}
