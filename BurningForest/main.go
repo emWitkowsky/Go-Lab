@@ -51,7 +51,7 @@ func main() {
 	fmt.Println("Image is being saved...")
 	VisualizeForestOnImage(forest, 100, "data/forest-after.png")
 
-	// percentage of burned trees
+	// percentage of burnt trees
 	burnedPercentage := calculatePercentageOfBurntTrees(forest, forestSize)
 	fmt.Printf("%.2f%% of the forest got burned.\n", burnedPercentage)
 
