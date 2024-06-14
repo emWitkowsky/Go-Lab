@@ -1,1 +1,1 @@
-Test pierwszego zadania z kryptografii oraz KOT oraz TWENTY FIFTEEN
+Test nie pierwszego i nie ostatniego zadania z golanga oraz KOT oraz TWENTY FIFTEEN
